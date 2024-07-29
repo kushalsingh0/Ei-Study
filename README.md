@@ -15,7 +15,3 @@ To get started with the exercises, navigate to the respective exercise directory
 
 - Java Development Kit (JDK) installed
 - An IDE or text editor of your choice
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
