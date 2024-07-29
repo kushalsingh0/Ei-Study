@@ -27,40 +27,46 @@ class ScheduleManager {
     }
 
     public void run() {
-        while (true) {
-            System.out.println("1. Add Task");
-            System.out.println("2. Remove Task");
-            System.out.println("3. View Tasks");
-            System.out.println("4. Edit Task");
-            System.out.println("5. Mark Task as Completed");
-            System.out.println("6. Exit");
-            System.out.print("Choose an option: ");
-            int option = scanner.nextInt();
-            scanner.nextLine(); // Consume newline left-over
+        handleUserInput();
+    }
 
-            switch (option) {
-                case 1:
-                    addTask();
-                    break;
-                case 2:
-                    removeTask();
-                    break;
-                case 3:
-                    viewTasks();
-                    break;
-                case 4:
-                    editTask();
-                    break;
-                case 5:
-                    markTaskAsCompleted();
-                    break;
-                case 6:
-                    System.out.println("Exiting...");
-                    return;
-                default:
-                    System.out.println("Invalid option. Please choose again.");
-            }
+    private void handleUserInput() {
+        System.out.println("1. Add Task");
+        System.out.println("2. Remove Task");
+        System.out.println("3. View Tasks");
+        System.out.println("4. Edit Task");
+        System.out.println("5. Mark Task as Completed");
+        System.out.println("6. Exit");
+        System.out.print("Choose an option: ");
+        
+        int option = scanner.nextInt();
+        scanner.nextLine(); // Consume newline left-over
+
+        switch (option) {
+            case 1:
+                addTask();
+                break;
+            case 2:
+                removeTask();
+                break;
+            case 3:
+                viewTasks();
+                break;
+            case 4:
+                editTask();
+                break;
+            case 5:
+                markTaskAsCompleted();
+                break;
+            case 6:
+                System.out.println("Exiting...");
+                return;
+            default:
+                System.out.println("Invalid option. Please choose again.");
         }
+
+        // Recursive call to handle next user input
+        handleUserInput();
     }
 
     private void addTask() {
@@ -88,6 +94,7 @@ class ScheduleManager {
             System.out.println("Error: Invalid task");
         }
     }
+
     private boolean isTaskConflict(Task task) {
         for (Task existingTask : tasks) {
             if (task.getStartTime().isBefore(existingTask.getEndTime()) && task.getEndTime().isAfter(existingTask.getStartTime())) {
@@ -105,6 +112,7 @@ class ScheduleManager {
         }
         return null;
     }
+
     private void removeTask() {
         System.out.print("Enter task description: ");
         String description = scanner.nextLine();
